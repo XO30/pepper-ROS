@@ -1,0 +1,15 @@
+version: '3'
+services:
+  ros:
+    build: .
+    network_mode: host
+    volumes:
+      - ./src/custom:/root/catkin_ws/src/custom
+    environment:
+      - ROBOT_IP=192.168.1.101 # IP of the robot
+      - PEPPER_PORT=9559 # port of the robot
+      - LANGUAGE=German # languafe for pepper tts
+      - VOICE_SPEED=200 # speed of pepper tts
+      - VOICE_PITCH=1.1 # pitch of pepper tts
+      - NETWORK_INTERFACE=docker0 # network interface of the docker container
+    command: ./start_ros.sh 

@@ -1,0 +1,12 @@
+<launch>
+        <arg name="ip_pepper" default="192.168.1.103" />
+        <arg name="iface" default="enxf8e43b3ea819" />
+        <arg name="lang" default="English" />
+
+        <node pkg="pepper_dcm_bringup" type="pepper_bot" name="pepper">
+                <param name="robot_ip" value="$(arg ip_pepper)" />
+                <param name="network_interface" value="$(arg iface)" />
+        </node>
+</launch>
+
+

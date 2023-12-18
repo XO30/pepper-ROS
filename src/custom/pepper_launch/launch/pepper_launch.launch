@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="robot_ip" default="$(env ROBOT_IP)" />
+    <arg name="pepper_port" default="$(env PEPPER_PORT)" />
+    <arg name="language" default="$(env LANGUAGE)" />
+    <arg name="voice_speed" default="$(env VOICE_SPEED)" />
+    <arg name="voice_pitch" default="$(env VOICE_PITCH)" />
+    <arg name="network_interface" default="$(env NETWORK_INTERFACE)" />
+
+    <include file="$(find pepper_dcm_bringup)/launch/pepper_bringup.launch">
+        <arg name="robot_ip" value="$(arg robot_ip)" />
+        <arg name="network_interface" value="$(arg network_interface)" />
+    </include>
+
+    <node pkg="pepper_tts" type="pepper_tts_node.py" name="pepper_tts" args="_pepper_ip:=$(arg robot_ip) _pepper_port:=$(arg pepper_port) _language:=$(arg language) _voice_speed:=$(arg voice_speed) _voice_pitch:=$(arg voice_pitch)" />
+    <node pkg="pepper_sound" type="pepper_sound_node.py" name="pepper_sound" args="_pepper_ip:=$(arg robot_ip) _pepper_port:=$(arg pepper_port)" />
+    <node pkg="pepper_face_detection" type="face_detection_node.py" name="face_detection" args="_pepper_ip:=$(arg robot_ip) _pepper_port:=$(arg pepper_port)" />
+    <node pkg="pepper_gestic" type="pepper_arm.py" name="pepper_arm" />
+    <node pkg="pepper_gestic" type="pepper_left_gestic.py" name="pepper_left_gestic" />
+    <node pkg="pepper_gestic" type="pepper_right_gestic.py" name="pepper_right_gestic" />
+    <node pkg="pepper_gestic" type="pepper_head_movement.py" name="pepper_head_movement" />
+</launch>
+
